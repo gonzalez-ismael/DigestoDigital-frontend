@@ -1,0 +1,36 @@
+<div>
+    <h2>Configuracion Niveles de Confidencialidad</h2>
+    <p>Esta es una lista de los Niveles de Confidencialidad disponibles para tus documentos.</p>
+
+    <div style="margin: 10px;">
+        <form [formGroup]="nivelConfidencialidadForm" (ngSubmit)="agregarNivelConfidencialidad()">
+            <input type="text" formControlName="nuevaNivelConfidencialidad"
+                placeholder="Nueva nivel de confidencialidad" />
+            <button type="submit" class="action-button">Agregar</button>
+        </form>
+    </div>
+
+    <div class="nivel-confidencialidad-list">
+        <ul>
+            <li *ngFor="let nivelConfidencialidad of nivelConfidencialidadList" class="nivel-confidencialidad-item">
+                <span (click)="nivelConfidencialidad.editable = !nivelConfidencialidad.editable"
+                    *ngIf="!nivelConfidencialidad.editable">{{ nivelConfidencialidad.nivelConfidencialidad }}</span>
+                <input *ngIf="nivelConfidencialidad.editable" [value]="nivelConfidencialidad.nivelConfidencialidad"
+                    #nivelConfidencialidadInput
+                    (keyup.enter)="actualizarNivelConfidencialidad(nivelConfidencialidad.id); nivelConfidencialidad.editable = false;" />
+                <button *ngIf="!nivelConfidencialidad.editable" (click)="nivelConfidencialidad.editable = true"
+                    class="action-button">Editar</button>
+                <button *ngIf="nivelConfidencialidad.editable" id="guardarButton"
+                    (click)="actualizarNivelConfidencialidad(nivelConfidencialidad.id); nivelConfidencialidad.editable = false;"
+                    class="action-button">Guardar</button>
+                <button *ngIf="nivelConfidencialidad.editable" id="cancelarButton"
+                    (click)="cancelarNivelConfidencialidad(nivelConfidencialidad); nivelConfidencialidad.editable = false;"
+                    class="action-button">Cancelar</button>
+                <button (click)="eliminarNivelConfidencialidad(nivelConfidencialidad.id)"
+                    class="action-button">Eliminar</button>
+            </li>
+        </ul>
+    </div>
+
+
+</div>

@@ -1,0 +1,33 @@
+<div>
+    <h2>Configuracion de Palabras Claves</h2>
+    <p>Esta es una lista de las Palabras Claves disponibles para tus documentos.</p>
+
+    <div style="margin: 10px;">
+        <form [formGroup]="palabraClaveForm" (ngSubmit)="agregarPalabraClave()">
+            <input type="text" formControlName="nuevaPalabraClave" placeholder="Nueva palabra-clave" />
+            <button type="submit" class="action-button">Agregar</button>
+        </form>
+    </div>
+
+    <div class="palabra-clave-list">
+        <ul>
+            <li *ngFor="let palabraClave of palabraClaveList" class="palabra-clave-item">
+                <span (click)="palabraClave.editable = !palabraClave.editable" *ngIf="!palabraClave.editable">{{ palabraClave.palabraClave }}</span>
+                <input *ngIf="palabraClave.editable" [value]="palabraClave.palabraClave" #palabraClaveInput
+                    (keyup.enter)="actualizarPalabraClave(palabraClave.id); palabraClave.editable = false;" />
+                <button *ngIf="!palabraClave.editable" (click)="palabraClave.editable = true"
+                    class="action-button">Editar</button>
+                <button *ngIf="palabraClave.editable" id="guardarButton"
+                    (click)="actualizarPalabraClave(palabraClave.id); palabraClave.editable = false;"
+                    class="action-button">Guardar</button>
+                <button *ngIf="palabraClave.editable" id="cancelarButton"
+                    (click)="cancelarPalabraClave(palabraClave); palabraClave.editable = false;"
+                    class="action-button">Cancelar</button>
+                <button (click)="eliminarPalabraClave(palabraClave.id)" class="action-button">Eliminar</button>
+            </li>
+        </ul>
+    </div>
+
+
+
+</div>

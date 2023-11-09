@@ -1,0 +1,31 @@
+<div>
+    <h2>Configuracion de los Estados de Vigencia</h2>
+    <p>Esta es una lista de estados de vigencia para tus documentos.</p>
+
+    <div style="margin: 10px;">
+        <form [formGroup]="vigenciaForm" (ngSubmit)="agregarVigencia()">
+            <input type="text" formControlName="nuevaVigencia" placeholder="Nueva vigencia" />
+            <button type="submit" class="action-button">Agregar</button>
+        </form>
+    </div>
+
+    <div class="vigencia-list">
+        <ul>
+            <li *ngFor="let vigencia of vigenciaList" class="vigencia-item">
+                <span (click)="vigencia.editable = !vigencia.editable" *ngIf="!vigencia.editable">{{ vigencia.vigencia }}</span>
+                <input *ngIf="vigencia.editable" [value]="vigencia.vigencia" #vigenciaInput
+                    (keyup.enter)="actualizarVigencia(vigencia.id); vigencia.editable = false;" />
+                <button *ngIf="!vigencia.editable" (click)="vigencia.editable = true"
+                    class="action-button">Editar</button>
+                <button *ngIf="vigencia.editable" id="guardarButton"
+                    (click)="actualizarVigencia(vigencia.id); vigencia.editable = false;"
+                    class="action-button">Guardar</button>
+                <button *ngIf="vigencia.editable" id="cancelarButton"
+                    (click)="cancelarVigencia(vigencia); vigencia.editable = false;"
+                    class="action-button">Cancelar</button>
+                <button (click)="eliminarVigencia(vigencia.id)" class="action-button">Eliminar</button>
+            </li>
+        </ul>
+    </div>
+
+</div>

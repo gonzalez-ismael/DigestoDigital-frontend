@@ -1,0 +1,32 @@
+<div>
+    <h2>Configuracion de los Destinatarios</h2>
+    <p>Esta es una lista de los posibles destinaraios de los documentos.</p>
+
+    <div style="margin: 10px;">
+        <form [formGroup]="destinatarioForm" (ngSubmit)="agregarDestinatario()">
+            <input type="text" formControlName="nuevaDestinatario" placeholder="Nuevo destinatario" />
+            <button type="submit" class="action-button">Agregar</button>
+        </form>
+    </div>
+
+    <div class="destinatario-list">
+        <ul>
+            <li *ngFor="let destinatario of destinatarioList" class="destinatario-item">
+                <span (click)="destinatario.editable = !destinatario.editable" *ngIf="!destinatario.editable">{{
+                    destinatario.destinatario }}</span>
+                <input *ngIf="destinatario.editable" [value]="destinatario.destinatario" #destinatarioInput
+                    (keyup.enter)="actualizarDestinatario(destinatario.id); destinatario.editable = false;" />
+                <button *ngIf="!destinatario.editable" (click)="destinatario.editable = true"
+                    class="action-button">Editar</button>
+                <button *ngIf="destinatario.editable" id="guardarButton"
+                    (click)="actualizarDestinatario(destinatario.id); destinatario.editable = false;"
+                    class="action-button">Guardar</button>
+                <button *ngIf="destinatario.editable" id="cancelarButton"
+                    (click)="cancelarDestinatario(destinatario); destinatario.editable = false;"
+                    class="action-button">Cancelar</button>
+                <button (click)="eliminarDestinatario(destinatario.id)" class="action-button">Eliminar</button>
+            </li>
+        </ul>
+    </div>
+
+</div>

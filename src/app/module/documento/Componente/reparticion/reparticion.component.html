@@ -1,0 +1,31 @@
+<div>
+    <h2>Configuracion de Reparticiones</h2>
+    <p>Esta es una lista de las reparticiones disponibles para tus documentos.</p>
+
+    <div style="margin: 10px;">
+        <form [formGroup]="reparticionForm" (ngSubmit)="agregarReparticion()">
+            <input type="text" formControlName="nuevaReparticion" placeholder="Nueva repartición" />
+            <button type="submit" class="action-button">Agregar</button>
+        </form>
+    </div>
+    
+    <div class="reparticion-list">
+        <ul>
+            <li *ngFor="let reparticion of reparticionList" class="reparticion-item">
+                <span (click)="reparticion.editable = !reparticion.editable" *ngIf="!reparticion.editable">{{ reparticion.reparticion }}</span>
+                <input *ngIf="reparticion.editable" [value]="reparticion.reparticion" #reparticionInput
+                    (keyup.enter)="actualizarReparticion(reparticion.id); reparticion.editable = false;" />
+                <button *ngIf="!reparticion.editable" (click)="reparticion.editable = true"
+                    class="action-button">Editar</button>
+                <button *ngIf="reparticion.editable" id="guardarButton"
+                    (click)="actualizarReparticion(reparticion.id); reparticion.editable = false;"
+                    class="action-button">Guardar</button>
+                <button *ngIf="reparticion.editable" id="cancelarButton"
+                    (click)="cancelarReparticion(reparticion); reparticion.editable = false;"
+                    class="action-button">Cancelar</button>
+                <button (click)="eliminarReparticion(reparticion.id)" class="action-button">Eliminar</button>
+            </li>
+        </ul>
+    </div>    
+    
+</div>
