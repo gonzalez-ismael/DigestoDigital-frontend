@@ -1,0 +1,58 @@
+<body>
+    <div class="container">
+        <h2>Carga de Documento</h2>
+        <form [formGroup]="formulario" (ngSubmit)="onSubmit()">
+            <label for="id2">ID2:</label>
+            <input type="text" formControlName="id2" required>
+
+            <label for="titulo">Título:</label>
+            <input type="text" formControlName="titulo" required>
+
+            <label for="fecha_emision">Fecha de Emisión:</label>
+            <input type="date" formControlName="fecha_emision" required>
+
+            <label for="descripcion">Descripción:</label>
+            <textarea formControlName="descripcion" rows="4" required></textarea>
+
+            <label for="taxonomia">Taxonomía:</label>
+            <input type="text" formControlName="taxonomia" required>
+
+            <label for="url">Url:</label>
+            <input type="text" formControlName="url" required>
+
+            <label for="reparticion">Repartición:</label>
+            <select name="reparticion" formControlName="reparticion" required>
+                <option *ngFor="let reparticion of reparticiones" [value]="reparticion.id">{{ reparticion.reparticion }}
+                </option>
+            </select>
+
+            <label for="vigencia">Vigencia:</label>
+            <select name="vigencia" formControlName="vigencia" required>
+                <option *ngFor="let vigencia of vigencias" [value]="vigencia.id">{{ vigencia.vigencia }}</option>
+            </select>
+
+            <label for="nivelConfidencialidad">Nivel de Confidencialidad:</label>
+            <select name="nivelConfidencialidad" formControlName="nivelConfidencialidad" required>
+                <option *ngFor="let nivelConfidencialidad of nivelesConfidencialidad"
+                    [value]="nivelConfidencialidad.id"> {{ nivelConfidencialidad.nivelConfidencialidad }}
+                </option>
+            </select>
+
+            <label>Selecciona palabras clave:</label>
+            <div *ngFor="let palabraClave of palabrasClave" class="divContenedor">
+                <div class="elemento"><input type="checkbox" [value]="palabraClave.id"
+                        (change)="onPalabrasClaveCheckboxChange($event)"></div>
+                <div class="elemento">{{ palabraClave.palabraClave }}</div>
+            </div>
+
+            <label>Selecciona destinatarios:</label>
+            <div *ngFor="let destinatario of destinatarios" class="divContenedor">
+                <div class="elemento"><input type="checkbox" [value]="destinatario.id"
+                        (change)="onDestinatariosCheckboxChange($event)"></div>
+                <div class="elemento">{{ destinatario.destinatario }}</div>
+            </div>
+
+            <input type="submit" value="Guardar">
+        </form>
+    </div>
+</body>

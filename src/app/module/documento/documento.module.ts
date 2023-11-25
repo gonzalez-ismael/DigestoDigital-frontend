@@ -7,6 +7,7 @@ import { NivelConfidencialidadComponent } from './Componente/nivel-confidenciali
 import { PalabraClaveComponent } from './Componente/palabra-clave/palabra-clave.component';
 import { ReparticionComponent } from './Componente/reparticion/reparticion.component';
 import { DestinatarioComponent } from './Componente/destinatario/destinatario.component';
+import { SubirDocumentoComponent } from './Componente/subir-documento/subir-documento.component';
 
 @NgModule({
   declarations: [
@@ -15,7 +16,8 @@ import { DestinatarioComponent } from './Componente/destinatario/destinatario.co
     NivelConfidencialidadComponent,
     PalabraClaveComponent,
     ReparticionComponent,
-    DestinatarioComponent
+    DestinatarioComponent,
+    SubirDocumentoComponent
   ],
   imports: [
     CommonModule,
@@ -23,7 +25,8 @@ import { DestinatarioComponent } from './Componente/destinatario/destinatario.co
     ReactiveFormsModule
   ],
   exports: [
-    CaracterizarComponent
+    CaracterizarComponent,
+    SubirDocumentoComponent
   ]
 })
 export class DocumentoModule { }
